@@ -57,7 +57,7 @@ ilios.pm.resetStewardTree = function (dialog) {
         var model = null;
         rootNode = ilios.pm.stewardDialogSelectedTreeView.getRoot();
 
-        ilios.pm.stewardSelectedModels = new Array();
+        ilios.pm.stewardSelectedModels = [];
 
         if (! ilios.pm.subscribedToSelectedStewardLabelClick) {
             ilios.pm.stewardDialogSelectedTreeView.subscribe("clickEvent",
@@ -88,7 +88,7 @@ ilios.pm.resetStewardTree = function (dialog) {
  */
 ilios.pm.buildStewardDataSourceReturnForQuery = function (queryString) {
     return (ilios.pm.schoolDepartmentTreeModel != null) ? ilios.pm.schoolDepartmentTreeModel
-                                                        : new Array();
+                                                        : [];
 };
 
 ilios.pm.stewardDataSource
@@ -121,7 +121,7 @@ ilios.pm.stewardTreeDOMContentGenerator = function (parentDivId) {
 
     ilios.pm.stewardDialogTreeView = new YAHOO.widget.TreeView(parentDivId);
 
-    ilios.pm.stewardSelectedModels = new Array();
+    ilios.pm.stewardSelectedModels = [];
 };
 
 // @private
@@ -147,7 +147,7 @@ ilios.pm.stewardModelIsSelected = function (candidateModel) {
 ilios.pm.stewardTreeFilterResults = function (queryString, fullResponse, parsedResponse, callback,
                                               autoCompleter, idUniquer) {
     var len = parsedResponse.results.length;
-    var filteredResults = new Array();
+    var filteredResults = [];
     var i = 0;
     var regex = new RegExp(queryString, "gi");
     var model = null;
@@ -288,7 +288,7 @@ ilios.pm.stewardRedrawTreeAndCSS = function (tree) {
 // @private
 ilios.pm.handleStewardTreeDeselection = function (clickObject) {
     var node = clickObject.node;
-    var modelsToDeselect = new Array();
+    var modelsToDeselect = [];
     var nodeToPop = node;
     var i = 0;
 
@@ -323,7 +323,7 @@ ilios.pm.handleStewardTreeDeselection = function (clickObject) {
 // @private
 ilios.pm.handleStewardTreeSelection = function (clickObject) {
     var node = clickObject.node;
-    var modelsToSelect = new Array();
+    var modelsToSelect = [];
     var nodeToPop = node;
     var rootNode = ilios.pm.stewardDialogSelectedTreeView.getRoot();
     var i = 0;
@@ -442,7 +442,7 @@ ilios.pm.getStewardModelForId = function (stewardId) {
 //todo optimize spot - a different data model would make all the difference
 ilios.pm.getDepartmentsForParentId = function (stewardId) {
     var model = null;
-    var rhett = new Array();
+    var rhett = [];
 
     for (var key in ilios.pm.schoolDepartmentTreeModel) {
         model = ilios.pm.schoolDepartmentTreeModel[key];
