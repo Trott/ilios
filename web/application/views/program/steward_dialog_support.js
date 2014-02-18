@@ -180,7 +180,7 @@ ilios.pm.stewardTreeHandleResults = function (resultDataObject, queryString, res
 // @private
 ilios.pm.findSchoolNodeForId = function (rootNode, schoolId) {
     var children = rootNode.children;
-    var len = (children != null) ? children.length : 0;
+    var len = children ? children.length : 0;
     var i = 0;
 
     for (; i < len; i++) {
