@@ -269,7 +269,7 @@ ilios.pm.redrawStewardTreesAndUpdateCSS = function () {
 
 // @private
 ilios.pm.stewardRedrawTreeAndCSS = function (tree) {
-    if (tree != null) {
+    if (tree) {
         var schoolNodes = null;
 
         tree.draw();
