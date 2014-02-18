@@ -170,7 +170,11 @@ ilios.home.transaction.savePreference = function (url, paramString, dialogToClos
                 return;
             }
 
-            ilios.global.preferencesModel.updateWithServerDispatchedObject(parsedObject.prefs);
+            if (! ilios.preferences.preferencesModel) {
+                ilios.preferences.installPreferencesModel();
+            }
+
+            ilios.preferences.preferencesModel.updateWithServerDispatchedObject(parsedObject.prefs);
 
             ilios.utilities.removeElementWithValue(ilios.alert.networkActivityI18NStrings,
                 'dashboard.saving_preferences');

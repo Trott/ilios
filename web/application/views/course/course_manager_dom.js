@@ -446,6 +446,7 @@ ilios.cm.courseLoader = function (courseModelStub) {
         YAHOO.util.Dom.addClass(element, 'icon-warning');
     }
 
+    ilios.preferences.installPreferencesModel();
     ilios.cm.handleArchivingLinkVisibility();
     ilios.cm.handleRolloverLinkVisibility();
 
@@ -477,7 +478,7 @@ ilios.cm.updatePublishAllUI = function () {
 
 ilios.cm.handleArchivingLinkVisibility = function () {
     var element = document.getElementById('archiving_link_div');
-    var showArchiveLink = (ilios.global.preferencesModel.showCourseArchiving()
+    var showArchiveLink = (ilios.preferences.preferencesModel.courseArchiving
                                     && ilios.cm.currentCourseModel.isPublished());
 
     if (showArchiveLink) {
@@ -511,7 +512,7 @@ ilios.cm.handleArchivingLinkVisibility = function () {
 
 ilios.cm.handleRolloverLinkVisibility = function () {
     var element = document.getElementById('rollover_link_div');
-    var showRolloverLink = ilios.global.preferencesModel.showCourseRollover();
+    var showRolloverLink = ilios.preferences.preferencesModel.courseRollover;
 
     if (showRolloverLink) {
         showRolloverLink = ilios.cm.currentCourseModel.isPublished();
@@ -749,10 +750,15 @@ ilios.cm.populateCourseAndSetEnable = function (title, startDate, endDate, yearS
 
 ilios.cm.repopulateListedCourseCompetencies = function (initialPopulation) {
     var element = document.getElementById('-1_competency_picker_selected_text_list');
+
+    // If this is called twice, we want to replace the list, not append it again.
+    // So remove anything that's already in the element.
+    element.innerHTML = '';
+
     var objectives = initialPopulation ? null : ilios.cm.currentCourseModel.getObjectives();
     var boundingObjectives = initialPopulation ? null : ilios.cm.programCohortObjectives;
 
-    element.innerHTML = ilios.competencies.generateListHTMLForSelectedCompetencies(
+    ilios.competencies.appendListForSelectedCompetencies(element,
         ilios.cm.currentCourseModel.getCompetencies(), objectives, boundingObjectives);
 };
 
@@ -1696,7 +1702,6 @@ ilios.cm.disc_initDialog = function (who, knows, args) {
     var disc_listingTextField = "discipline_picker_selected_text_list";
     var disc_selectedItemContainer = "discipline_picked";
 
-
     disc_dataSource.responseType = YAHOO.util.XHRDataSource.TYPE_XML;
     disc_dataSource.responseSchema = { resultNode: "Result", fields: ["title", "discipline_id"] };
     /*
@@ -1773,7 +1778,7 @@ ilios.cm.disc_initDialog = function (who, knows, args) {
         textFieldContent = modelTitles.join(";");
 
         element = document.getElementById(inputTextId);
-        element.addChild(document.createTextNode(textFieldContent));
+        element.textContent = textFieldContent;
     }; // end function
 
     /*

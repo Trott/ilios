@@ -39,7 +39,8 @@ $viewsPath = getServerFilePath('views');
     <!-- Ilios JS -->
     <script type="text/javascript" src="<?php echo $controllerURL; ?>/getI18NJavascriptVendor"></script>
     <script type="text/javascript" src="<?php echo appendRevision($viewsUrlRoot . "scripts/ilios_base.js"); ?>"></script>
-    <script type="text/javascript" src="<?php echo appendRevision($viewsUrlRoot . "scripts/models/preferences_model.js"); ?>"></script>
+    <script type="text/javascript" src="<?php echo appendRevision($viewsUrlRoot . "scripts/ilios_alert.js"); ?>"></script>
+    <script type="text/javascript" src="<?php echo appendRevision($viewsUrlRoot . "scripts/ilios_preferences.js"); ?>"></script>
     <script type="text/javascript" src="<?php echo appendRevision($viewsUrlRoot . "scripts/ilios_utilities.js"); ?>"></script>
     <script type="text/javascript" src="<?php echo appendRevision($viewsUrlRoot . "scripts/ilios_ui.js"); ?>"></script>
     <script type="text/javascript" src="<?php echo appendRevision($viewsUrlRoot . "scripts/ilios_ui_rte.js"); ?>"></script>
@@ -87,6 +88,8 @@ $viewsPath = getServerFilePath('views');
     <script type="text/javascript" src="<?php echo appendRevision($viewsUrlRoot . "course/multipurpose_session_lightbox_support.js"); ?>"></script>
     <script type="text/javascript" src="<?php echo appendRevision($viewsUrlRoot . "scripts/models/mesh_item_model.js"); ?>"></script>
     <script type="text/javascript" src="<?php echo appendRevision($viewsUrlRoot . "scripts/mesh_base_framework.js"); ?>"></script>
+    <?php include_once $viewsPath . 'common/set_user_preferences.inc.php'; ?>
+    <?php include_once $viewsPath . 'common/start_idle_page_timer.inc.php'; ?>
 </head>
 <body class="course yui-skin-sam">
     <div id="wrapper">
@@ -161,9 +164,7 @@ $viewsPath = getServerFilePath('views');
         var sessionTypeModel = null;
 
 <?php
-    include_once $viewsPath . 'common/set_user_preferences.inc.php';
     include_once $viewsPath . 'common/load_school_competencies.inc.php';
-    include_once $viewsPath . 'common/start_idle_page_timer.inc.php';
 ?>
 
         YAHOO.util.Event.onDOMReady(ilios.cm.assembleArchivingDialog, {});

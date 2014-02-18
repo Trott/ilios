@@ -257,9 +257,8 @@ ilios.pm.transaction.loadProgramYearsForProgramId = function (programId) {
                         scratchElement = document.getElementById(titleId);
                         collapseTrio = ilios.pm.getCollapseTrioForFirstChildLevelDiv(scratchElement);
                         str = ilios.competencies.generateSummaryStringForSelectedCompetencies(childModelArray);
-                        collapseTrio[0].innerHTML = ilios.lang.ellipsisedOfLength(str, 75);
-                        str = ilios.competencies.generateListHTMLForSelectedCompetencies(childModelArray);
-                        collapseTrio[1].innerHTML = str;
+                        collapseTrio[0].innerHTML = str;
+                        ilios.competencies.appendListForSelectedCompetencies(collapseTrio[1], childModelArray);
                         programYearModel.setCompetencyArray(childModelArray);
                     }
 
@@ -311,7 +310,7 @@ ilios.pm.transaction.loadProgramYearsForProgramId = function (programId) {
                         titleId = ilios.pm.generateIdStringForDisciplineContent(containerNumber);
                         scratchElement = document.getElementById(titleId);
                         collapseTrio = ilios.pm.getCollapseTrioForFirstChildLevelDiv(scratchElement);
-                        collapseTrio[0].innerHTML = ilios.lang.ellipsisedOfLength(textListContent, 75);
+                        collapseTrio[0].innerHTML = textListContent;
                         collapseTrio[1].innerHTML = textListContent;
                         programYearModel.setDisciplineArray(childModelArray);
                     }
@@ -339,7 +338,7 @@ ilios.pm.transaction.loadProgramYearsForProgramId = function (programId) {
                         titleId = ilios.pm.generateIdStringForDirectorContent(containerNumber);
                         scratchElement = document.getElementById(titleId);
                         collapseTrio = ilios.pm.getCollapseTrioForFirstChildLevelDiv(scratchElement);
-                        collapseTrio[0].innerHTML = ilios.lang.ellipsisedOfLength(textListContent, 75);
+                        collapseTrio[0].innerHTML = textListContent;
                         collapseTrio[1].innerHTML = textListContent;
                         programYearModel.setDirectors(childModelArray);
                     }
@@ -369,14 +368,17 @@ ilios.pm.transaction.loadProgramYearsForProgramId = function (programId) {
                         titleId = ilios.pm.generateIdStringForStewardContent(containerNumber);
                         scratchElement = document.getElementById(titleId);
                         collapseTrio = ilios.pm.getCollapseTrioForFirstChildLevelDiv(scratchElement);
-                        collapseTrio[0].innerHTML = ilios.lang.ellipsisedOfLength(textListContent, 75);
+                        collapseTrio[0].innerHTML = textListContent;
                         collapseTrio[1].innerHTML = textListContent;
                         programYearModel.setStewardArray(childModelArray);
                     }
 
                     programYearModel.setLocked(modelTree['locked'] == '1');
 
-                    if (ilios.global.preferencesModel.showProgramYearArchiving()
+                    if (! ilios.preferences.preferencesModel) {
+                        ilios.preferences.installPreferencesModel();
+                    }
+                    if (ilios.preferences.preferencesModel.programYearArchiving
                                                         && programYearModel.isPublished()) {
                         idString = ilios.pm.generateIdStringForArchivingDiv(containerNumber);
 

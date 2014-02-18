@@ -66,11 +66,12 @@ $viewsPath = getServerFilePath('views');
         ),
         'ilios' => array( // ilios js
             'application/views/scripts/ilios_base.js',
+            'application/views/scripts/ilios_alert.js',
             'application/views/scripts/ilios_utilities.js',
             'application/views/scripts/ilios_ui.js',
             'application/views/scripts/ilios_dom.js',
             'application/views/scripts/models/abstract_js_model_form.js',
-            'application/views/scripts/models/preferences_model.js',
+            'application/views/scripts/ilios_preferences.js',
             'application/views/scripts/models/competency_model.js',
             'application/views/scripts/models/school_competency_model.js',
             'application/views/scripts/models/discipline_model.js',
@@ -102,6 +103,8 @@ $viewsPath = getServerFilePath('views');
     );
     writeJsScripts($js, 'educator_dashboard', $this->config->item('script_aggregation_enabled'), $this->config->item('ilios_revision'));
 ?>
+<?php include_once $viewsPath . 'common/set_user_preferences.inc.php'; ?>
+<?php include_once $viewsPath . 'common/start_idle_page_timer.inc.php'; ?>
 </head>
 <body class="home yui-skin-sam">
     <div id="wrapper">
@@ -593,9 +596,7 @@ $viewsPath = getServerFilePath('views');
             window.inform = ilios.alert.inform;
         });
 <?php
-    include_once $viewsPath . 'common/set_user_preferences.inc.php';
     include_once $viewsPath . 'common/load_school_competencies.inc.php';
-    include_once $viewsPath . 'common/start_idle_page_timer.inc.php';
 ?>
         YAHOO.util.Event.onDOMReady(ilios.dom.generateTreeSelectionDialogMarkupAndWireContent, {
             trigger: 'competency_picker_show_dialog',

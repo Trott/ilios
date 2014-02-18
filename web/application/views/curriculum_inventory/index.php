@@ -43,10 +43,11 @@ $js = array(
     ),
     'ilios' => array( // ilios js
         'application/views/scripts/ilios_base.js',
+        'application/views/scripts/ilios_alert.js',
         'application/views/scripts/ilios_utilities.js',
         'application/views/scripts/ilios_ui.js',
         'application/views/scripts/ilios_dom.js',
-        'application/views/scripts/models/preferences_model.js',
+        'application/views/scripts/ilios_preferences.js',
         'application/views/curriculum_inventory/js/ilios.cim.model.js',
         'application/views/curriculum_inventory/js/ilios.cim.widget.js',
         'application/views/curriculum_inventory/js/ilios.cim.view.js',
@@ -55,6 +56,7 @@ $js = array(
 );
 writeJsScripts($js, 'curriculum_inventory_manager', $this->config->item('script_aggregation_enabled'), $this->config->item('ilios_revision'));
 ?>
+<?php include_once $viewsPath . 'common/start_idle_page_timer.inc.php'; ?>
 </head>
 <body class="curriculum_inventory yui-skin-sam">
 <div id="wrapper">
@@ -142,7 +144,6 @@ include 'edit_sequence_block_dialog.inc.php';
         }
         var app = new ilios.cim.App(config, payload);
     });
-    <?php include_once $viewsPath . 'common/start_idle_page_timer.inc.php'; ?>
 </script>
 </body>
 </html>

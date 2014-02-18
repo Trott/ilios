@@ -201,10 +201,13 @@ ilios.pm.dirtyStateListener = {
                 idStr = ilios.pm.generateIdStringForDirectorContent(containerNumber);
                 element = document.getElementById(idStr);
                 collapseTrio = ilios.pm.getCollapseTrioForFirstChildLevelDiv(element);
-                collapseTrio[0].innerHTML = ilios.lang.ellipsisedOfLength(directorString, 75);
+                collapseTrio[0].innerHTML = directorString;
                 collapseTrio[1].innerHTML = directorString;
 
-                if (ilios.global.preferencesModel.showProgramYearArchiving()
+                if (!ilios.preferences.preferencesModel) {
+                    ilios.preferences.installPreferencesModel();
+                }
+                if (ilios.preferences.preferencesModel.programYearArchiving
                             && model.isPublished()) {
                     idStr = ilios.pm.generateIdStringForArchivingDiv(containerNumber);
                     element = new Element(document.getElementById(idStr));
@@ -326,7 +329,7 @@ ilios.pm.populateProgramAndSetEnable = function (title, shortTitle, duration, pr
     }
 
     element = document.getElementById('expand_program_years_link');
-    element.setAttribute('style', 'display: inline;');
+    element.setAttribute('style', 'display: inherit');
 
     element = document.getElementById('add_new_program_year_link');
     ilios.dom.setElementEnabled(element, enabled);
@@ -438,7 +441,7 @@ ilios.pm.setCollapsedDivVisibility = function (widgetDiv, shouldToggle) {
     if ((verboseDiv.getStyle('display') != 'none') && shouldToggle) {
         collapseWidgetDiv.removeClass('expanded_widget');
         collapseWidgetDiv.addClass('collapsed_widget');
-        summaryDiv.setStyle('display', ((summaryDiv.tagName == 'DIV') ? 'block' : 'inline'));
+        summaryDiv.setStyle('display', 'inherit');
         verboseDiv.setStyle('display', 'none');
     } else {
         collapseWidgetDiv.removeClass('collapsed_widget');
@@ -494,7 +497,7 @@ ilios.pm.appendProgramYearComponentToDOM = function (parentElement, contentId, l
     //data column
     scratchInput = document.createElement('div');
     scratchInput.setAttribute('id', contentId);
-    scratchInput.setAttribute('class', 'read_only_data py_summary_shpeel');
+    scratchInput.setAttribute('class', 'read_only_data py_summary_shpeel truncate');
     Event.addListener(scratchInput, 'click', function () {
         ilios.pm.setCollapsedDivVisibility(this, true);
     });
@@ -780,7 +783,10 @@ ilios.pm.programYearContentGenerator = function (parentElement, containerNumber)
         ilios.pm.generateIdStringForStewardContent(containerNumber),
         i18nStr, 'steward_picker_show_dialog', '366', containerNumber, 'gen_dialog_open');
 
-    if (ilios.global.preferencesModel.showProgramYearArchiving()) {
+    if (! ilios.preferences.preferencesModel) {
+        ilios.preferences.installPreferencesModel();
+    }
+    if (ilios.preferences.preferencesModel.programYearArchiving) {
         scratchInput = document.createElement('a');
         scratchInput.setAttribute('href', '');
         scratchInput.setAttribute('onclick', 'return false;');
@@ -877,9 +883,8 @@ ilios.pm.addNewProgramYear = function () {
                 scratchElement = document.getElementById(titleId);
                 collapseTrio = ilios.pm.getCollapseTrioForFirstChildLevelDiv(scratchElement);
                 str = ilios.competencies.generateSummaryStringForSelectedCompetencies(modelArray);
-                collapseTrio[0].innerHTML = ilios.lang.ellipsisedOfLength(str, 75);
-                str = ilios.competencies.generateListHTMLForSelectedCompetencies(modelArray);
-                collapseTrio[1].innerHTML = str;
+                collapseTrio[0].innerHTML = str;
+                ilios.competencies.appendListForSelectedCompetencies(collapseTrio[1], modelArray);
             }
 
             modelArray = programYearModel.getDisciplineArray();
@@ -889,7 +894,7 @@ ilios.pm.addNewProgramYear = function () {
                 titleId = ilios.pm.generateIdStringForDisciplineContent(containerNumber);
                 scratchElement = document.getElementById(titleId);
                 collapseTrio = ilios.pm.getCollapseTrioForFirstChildLevelDiv(scratchElement);
-                collapseTrio[0].innerHTML = ilios.lang.ellipsisedOfLength(textListContent, 75);
+                collapseTrio[0].innerHTML = textListContent;
                 collapseTrio[1].innerHTML = textListContent;
             }
 
@@ -900,7 +905,7 @@ ilios.pm.addNewProgramYear = function () {
                 titleId = ilios.pm.generateIdStringForDirectorContent(containerNumber);
                 scratchElement = document.getElementById(titleId);
                 collapseTrio = ilios.pm.getCollapseTrioForFirstChildLevelDiv(scratchElement);
-                collapseTrio[0].innerHTML = ilios.lang.ellipsisedOfLength(textListContent, 75);
+                collapseTrio[0].innerHTML = textListContent;
                 collapseTrio[1].innerHTML = textListContent;
             }
 
@@ -919,7 +924,7 @@ ilios.pm.addNewProgramYear = function () {
                 titleId = ilios.pm.generateIdStringForStewardContent(containerNumber);
                 scratchElement = document.getElementById(titleId);
                 collapseTrio = ilios.pm.getCollapseTrioForFirstChildLevelDiv(scratchElement);
-                collapseTrio[0].innerHTML = ilios.lang.ellipsisedOfLength(textListContent, 75);
+                collapseTrio[0].innerHTML = textListContent;
                 collapseTrio[1].innerHTML = textListContent;
             }
 
@@ -1475,7 +1480,7 @@ ilios.pm.disc_initDialog = function (who, knows, args) {
         if (element != null) {
             element.innerHTML = textFieldContent;
             element = document.getElementById(inputTextId);
-            element.innerHTML = ilios.lang.ellipsisedOfLength(textFieldContent, 75);
+            element.innerHTML = textFieldContent;
         } else {
             element = document.getElementById(inputTextId);
             element.innerHTML = textFieldContent;

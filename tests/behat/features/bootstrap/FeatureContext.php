@@ -15,11 +15,45 @@ use Behat\MinkExtension\Context\MinkContext;
 class FeatureContext extends MinkContext
 {
     /**
+     * Helper function for slow loading pages. http://docs.behat.org/cookbook/using_spin_functions.html
+     * Needed for Sauce Labs integration to work consistently probably because...
+     * ...initial page load includes a lot of resources and may need some extra time to complete.
+     * @todo: remove unnecessary elements, move elements that don't need to be in the critical path out of the critical path, and get rid of this
+     */
+    public function spin ($lambda, $wait = 60)
+    {
+        for ($i = 0; $i < $wait; $i++)
+        {
+            try {
+                if ($lambda($this)) {
+                    return true;
+                }
+            } catch (Exception $e) {
+                // do nothing
+            }
+
+            sleep(1);
+        }
+
+        $backtrace = debug_backtrace();
+
+        throw new Exception(
+            "Timeout thrown by " . $backtrace[1]['class'] . "::" . $backtrace[1]['function'] . "()"
+        );
+    }
+
+    /**
      * @Given /^I am on the Ilios home page$/
      */
     public function iAmOnTheIliosHomePage ()
     {
         $this->visit("/");
+        // Initial page load includes a lot of resources and may need some extra time to complete.
+        // @todo: remove unnecessary elements, move elements that don't need to be in the critical path out of the critical path, and get rid of this
+        $context = $this;
+        $this->spin(function($context) {
+            return (count($context->getSession()->getPage()->findById('content')) > 0);
+        });
     }
 
     /**
@@ -52,9 +86,17 @@ class FeatureContext extends MinkContext
     public function iLogInAsWithPassword ($user, $login)
     {
         $this->clickLink("Login");
+        $context = $this;
+        $this->spin(function($context) {
+            return (count($context->getSession()->getPage()->findField('username')) > 0);
+        });
         $this->fillField("User Name", $user);
         $this->fillField("Password", $login);
         $this->pressButton("login_button");
+        // Wait for login/logout link to reappear before continuing. Always id logout_link, yeah, misleading.
+        $this->spin(function($context) {
+            return ($context->getSession()->getPage()->findById('logout_link'));
+        });
     }
 
     /**
@@ -94,6 +136,11 @@ class FeatureContext extends MinkContext
      */
     public function iPressTheElementWithId ($id)
     {
+        // Wait for element to appear before trying to press it.
+        $this->spin(function ($context) use ($id) {
+            return $context->getSession()->getPage()->find('css', "#{$id}");
+        });
+
         $element = $this->getSession()->getPage()->find('css', "#{$id}");
         $element->press();
     }

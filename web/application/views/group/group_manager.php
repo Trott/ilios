@@ -35,7 +35,8 @@ $viewsPath = getServerFilePath('views');
     <!--  Ilios JS -->
     <script type="text/javascript" src="<?php echo $controllerURL; ?>/getI18NJavascriptVendor"></script>
     <script type="text/javascript" src="<?php echo appendRevision($viewsUrlRoot . "scripts/ilios_base.js"); ?>"></script>
-    <script type="text/javascript" src="<?php echo appendRevision($viewsUrlRoot . "scripts/models/preferences_model.js"); ?>"></script>
+    <script type="text/javascript" src="<?php echo appendRevision($viewsUrlRoot . "scripts/ilios_alert.js"); ?>"></script>
+    <script type="text/javascript" src="<?php echo appendRevision($viewsUrlRoot . "scripts/ilios_preferences.js"); ?>"></script>
     <script type="text/javascript" src="<?php echo appendRevision($viewsUrlRoot . "scripts/ilios_utilities.js"); ?>"></script>
     <script type="text/javascript" src="<?php echo appendRevision($viewsUrlRoot . "scripts/ilios_ui.js"); ?>"></script>
     <script type="text/javascript" src="<?php echo appendRevision($viewsUrlRoot . "scripts/ilios_dom.js"); ?>"></script>
@@ -52,6 +53,7 @@ $viewsPath = getServerFilePath('views');
     <script type="text/javascript" src="<?php echo appendRevision($viewsUrlRoot . "group/group_manager_transaction.js"); ?>"></script>
     <script type="text/javascript" src="<?php echo appendRevision($viewsUrlRoot . "group/subgroup_dom_support.js"); ?>"></script>
     <script type="text/javascript" src="<?php echo appendRevision($viewsUrlRoot . "group/manage_member_dialog_support.js"); ?>"></script>
+    <?php include_once $viewsPath . 'common/start_idle_page_timer.inc.php'; ?>
 </head>
 <body class="learner yui-skin-sam">
     <div id="wrapper">
@@ -104,7 +106,7 @@ $viewsPath = getServerFilePath('views');
             + ilios_i18nVendor.getI18NString('general.phrases.school_of')
             + ' <?php echo $school_name; ?>';
 
-        ilios.global.installPreferencesModel();
+        ilios.preferences.installPreferencesModel();
 
         YAHOO.util.Event.onDOMReady(ilios.dom.generateGenericDialogMarkupAndWireContent, {
             trigger : 'manage_member_picker_show_dialog',
@@ -124,7 +126,6 @@ $viewsPath = getServerFilePath('views');
             load_finish_listener : ilios.gm.mm.userGroupTreeFinishedPopulation
         });
 
-<?php include_once $viewsPath . 'common/start_idle_page_timer.inc.php'; ?>
         YAHOO.util.Event.onDOMReady(ilios.dom.generateSelectAndCloseDialogMarkupAndWireContent, {
             trigger : 'find_cohort_and_program',
             display_handler : ilios.ui.handleProgramCohortSelectionDialogDisplay,

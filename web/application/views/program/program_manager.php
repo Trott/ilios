@@ -38,7 +38,8 @@ $viewsPath = getServerFilePath('views');
     <!-- Ilios JS -->
     <script type="text/javascript" src="<?php echo $controllerURL; ?>/getI18NJavascriptVendor"></script>
     <script type="text/javascript" src="<?php echo appendRevision($viewsUrlRoot . "scripts/ilios_base.js"); ?>"></script>
-    <script type="text/javascript" src="<?php echo appendRevision($viewsUrlRoot . "scripts/models/preferences_model.js"); ?>"></script>
+    <script type="text/javascript" src="<?php echo appendRevision($viewsUrlRoot . "scripts/ilios_alert.js"); ?>"></script>
+    <script type="text/javascript" src="<?php echo appendRevision($viewsUrlRoot . "scripts/ilios_preferences.js"); ?>"></script>
     <script type="text/javascript" src="<?php echo appendRevision($viewsUrlRoot . "scripts/ilios_utilities.js"); ?>"></script>
     <script type="text/javascript" src="<?php echo appendRevision($viewsUrlRoot . "scripts/ilios_ui.js"); ?>"></script>
     <script type="text/javascript" src="<?php echo appendRevision($viewsUrlRoot . "scripts/ilios_ui_rte.js"); ?>"></script>
@@ -73,6 +74,8 @@ $viewsPath = getServerFilePath('views');
     <script type="text/javascript" src="<?php echo appendRevision($viewsUrlRoot . "scripts/competency_base_framework.js"); ?>"></script>
     <script type="text/javascript" src="<?php echo appendRevision($viewsUrlRoot . "program/competency_dialog_support.js"); ?>"></script>
     <script type="text/javascript" src="<?php echo appendRevision($viewsUrlRoot . "program/steward_dialog_support.js"); ?>"></script>
+    <?php include_once $viewsPath . 'common/set_user_preferences.inc.php'; ?>
+    <?php include_once $viewsPath . 'common/start_idle_page_timer.inc.php'; ?>
 </head>
 
 <body class="program yui-skin-sam">
@@ -154,6 +157,7 @@ $viewsPath = getServerFilePath('views');
 ?>
 <!-- end dialog tabs -->
     <script type="text/javascript" src="<?php echo appendRevision($viewsUrlRoot . "program/add_program_dialog_include.js"); ?>"></script>
+
     <script type="text/javascript">
         // register alert/inform overrides on window load
         YAHOO.util.Event.on(window, 'load', function() {
@@ -161,9 +165,7 @@ $viewsPath = getServerFilePath('views');
             window.inform = ilios.alert.inform;
         });
 <?php
-    include_once $viewsPath . 'common/set_user_preferences.inc.php';
     include_once $viewsPath . 'common/load_school_competencies.inc.php';
-    include_once $viewsPath . 'common/start_idle_page_timer.inc.php';
 ?>
         YAHOO.util.Event.onDOMReady(ilios.pm.disc_initDialog, {
             // unique event that triggers opening of the dialog fired

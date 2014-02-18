@@ -47,7 +47,8 @@ $viewsPath = getServerFilePath('views');
     <!-- Ilios JS -->
     <script type="text/javascript" src="<?php echo $controllerURL; ?>/getI18NJavascriptVendor"></script>
     <script type="text/javascript" src="<?php echo appendRevision($viewsUrlRoot . "scripts/ilios_base.js"); ?>"></script>
-    <script type="text/javascript" src="<?php echo appendRevision($viewsUrlRoot . "scripts/models/preferences_model.js"); ?>"></script>
+    <script type="text/javascript" src="<?php echo appendRevision($viewsUrlRoot . "scripts/ilios_alert.js"); ?>"></script>
+    <script type="text/javascript" src="<?php echo appendRevision($viewsUrlRoot . "scripts/ilios_preferences.js"); ?>"></script>
     <script type="text/javascript" src="<?php echo appendRevision($viewsUrlRoot . "scripts/ilios_dom.js"); ?>"></script>
     <script type="text/javascript" src="<?php echo appendRevision($viewsUrlRoot . "scripts/ilios_ui.js"); ?>"></script>
     <script type="text/javascript" src="<?php echo appendRevision($viewsUrlRoot . "scripts/ilios_utilities.js"); ?>"></script>
@@ -77,6 +78,7 @@ $viewsPath = getServerFilePath('views');
             ilios.management.user_accounts.passwordRequired = <?php echo ($password_required ? "true" : "false"); ?>;
             YAHOO.util.Event.onDOMReady(ilios.management.user_accounts.startUserAccountsWorkflow);
     </script>
+    <?php include_once $viewsPath . 'common/start_idle_page_timer.inc.php'; ?>
 </head>
 <body class="admin yui-skin-sam">
     <div id="wrapper">
@@ -199,8 +201,6 @@ $viewsPath = getServerFilePath('views');
             window.alert = ilios.alert.alert;
             window.inform = ilios.alert.inform;
         });
-
-<?php include_once $viewsPath . 'common/start_idle_page_timer.inc.php'; ?>
 
         // load school cohorts
         YAHOO.util.Event.onDOMReady(function () {
