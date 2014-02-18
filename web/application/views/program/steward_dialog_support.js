@@ -275,7 +275,7 @@ ilios.pm.stewardRedrawTreeAndCSS = function (tree) {
         tree.draw();
 
         schoolNodes = tree.getNodesByProperty('isSchool', true);
-        if (schoolNodes != null) {
+        if (schoolNodes) {
             var len = schoolNodes.length;
 
             for (var i = 0; i < len; i++) {
