@@ -243,7 +243,7 @@ ilios.pm.correctForStewardPlaceHolderNodes = function (rootNode) {
 ilios.pm.verifyChildlessUnselectedStewardNodes = function () {
     var rootNode = ilios.pm.stewardDialogTreeView.getRoot();
     var children = rootNode.children;
-    var len = (children != null) ? children.length : 0;
+    var len = children ? children.length : 0;
     var node = null;
     var departments = null;
 
