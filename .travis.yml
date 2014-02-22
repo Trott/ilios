@@ -20,7 +20,7 @@ install:
 
 before_script:
 # Set up Sauce Connect if we have a Sauce username set
-  - if [ "$SAUCE_USERNAME" ] ; then (curl https://gist.github.com/santiycr/5139565/raw/sauce_connect_setup.sh | bash); fi
+  - if [ "$SAUCE_USERNAME" ] ; then (curl -L https://gist.github.com/santiycr/5139565/raw/sauce_connect_setup.sh | bash); fi
 
 # Provision web server for Behat tests
   - "sudo apt-get install -y --force-yes mysql-server apache2 libapache2-mod-php5 php5-mysql php5-ldap sendmail expect > /dev/null"
@@ -54,7 +54,7 @@ script:
   - bin/phing db-install -q -propertyfile build.properties.sample -Dskip-prompt=true -Dskip-db-backup=true -Ddb.username=root -Ddb.password= -Ddb.group=ilios_test -Dencryption_key=lorem_ipsum -Ddeploydir=${PWD}/web -Dbackupdir=${PWD}/backup -Dwebuser=${USER} -Dwebgroup="`id -g -n`"
 
 # Run Behat tests on headless browsers
-  - "(cd tests/behat && bin/behat -p travis)"
+  - "(cd tests/behat && bin/behat --tags ~@ignore -p travis)"
 
 # Run Behat tests on GUI browsers via Sauce
-  - if [ "$SAUCE_USERNAME" ] ; then (cd tests/behat && bin/behat -c sauce.yml); fi
+  - if [ "$SAUCE_USERNAME" ] ; then (cd tests/behat && bin/behat --tags ~@ignore -c sauce.yml); fi

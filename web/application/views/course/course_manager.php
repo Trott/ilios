@@ -47,7 +47,8 @@ $viewsPath = getServerFilePath('views');
     <script type="text/javascript" src="<?php echo appendRevision($viewsUrlRoot . "scripts/ilios_dom.js"); ?>"></script>
     <script type="text/javascript">
         var controllerURL = "<?php echo $controllerURL; ?>/";
-        var currentUserId = "<?php echo $user_id; ?>";
+        <?php // @todo YEAH, if we could go ahead and stop doing this [v], that would be great. Ok? Thanks. [ST 2014/02/20] ?>
+        var currentUserId = "<?php echo $this->session->userdata('uid'); ?>";
         var offeringControllerURL = "<?php echo $offeringControllerURL; ?>";
         var learningMaterialsControllerURL = "<?php echo $learningMaterialsControllerURL; ?>/";
         var adminUserDisplayName = "<?php echo $admin_user_short_name; ?>";
@@ -160,7 +161,6 @@ $viewsPath = getServerFilePath('views');
             window.inform = ilios.alert.inform;
         });
 
-        var tmpStr = '<?php echo $institution_name; ?> ' + ilios_i18nVendor.getI18NString('general.terms.programs');
         var sessionTypeModel = null;
 
 <?php
@@ -177,10 +177,11 @@ $viewsPath = getServerFilePath('views');
             hide_autocomplete_input : 'value matters not',
             submit_override : ilios.cm.handleProgramCohortDialogSubmit,
             widget_dom_generator : ilios.ui.programCohortDialogTreeDOMGenerator,
-            tab_title : ilios_i18nVendor.getI18NString('general.phrases.select_cohort'),
+            tab_title : ilios_i18nVendor.getI18NString('general.phrases.available_cohorts'),
             id_uniquer : 'scde_',
-            panel_title_text : tmpStr,
             dom_root : 'cohort_pick_dialog',
+            title: ilios_i18nVendor.getI18NString('course_management.select_cohorts'),
+            selected_items_title: ilios_i18nVendor.getI18NString('general.phrases.selected_cohorts'),
             deselect_handler : ilios.cm.handleProgramCohortDialogDeselection,
             max_displayed_results: 250,
             panel_width: '700px'
