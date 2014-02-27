@@ -11,6 +11,7 @@
  * YUI container family
  * scripts/ilios_base.js
  * scripts/ilios_alert.js
+ * scripts/ilios_ui.js
  */
 
 /**
