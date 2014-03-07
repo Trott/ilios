@@ -396,7 +396,9 @@
          */
         _initAcademicLevels: function (data) {
             var i, n, model, map;
-            data = Lang.isArray(data) ? data : [];
+            if (! (data instanceof Array)) {
+                data = [];
+            }
 
             map = {};
 
