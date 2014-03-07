@@ -18,7 +18,7 @@
  * @class learner_view
  * @static
  */
-ilios.namespace('learner_view');
+ilios.learner_view = ilios.learner_view || {};
 
 ilios.learner_view.learnerViewDialog = null;
 

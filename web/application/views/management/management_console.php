@@ -56,7 +56,7 @@ $viewsPath = getServerFilePath('views');
     <script type="text/javascript">
         var controllerURL = "<?php echo $controllerURL; ?>/";    // expose this to our *.js
 
-        ilios.namespace('management');        // assure the existence of this page's namespace
+        ilios.management = ilios.management || {};        // assure the existence of this page's namespace
 
         ilios.management.cohortlessUserCount = <?php echo $cohortless_user_count; ?>;
         ilios.management.syncExceptionsCount = <?php echo $users_with_sync_exceptions_count; ?>;

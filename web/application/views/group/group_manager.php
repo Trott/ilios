@@ -43,7 +43,7 @@ $viewsPath = getServerFilePath('views');
     <script type="text/javascript" src="<?php echo appendRevision($viewsUrlRoot . "scripts/ilios_timer.js"); ?>"></script>
     <script type="text/javascript">
         var controllerURL = "<?php echo $controllerURL; ?>/"; // expose this to our group_manager_*.js
-        ilios.namespace('gm');          // assure the existence of this page's namespace
+        ilios.gm = ilios.gm || {};          // assure the existence of this page's namespace
     </script>
     <script type="text/javascript" src="<?php echo appendRevision($viewsUrlRoot . "scripts/models/abstract_js_model_form.js"); ?>"></script>
     <script type="text/javascript" src="<?php echo appendRevision($viewsUrlRoot . "scripts/models/program_cohort_model.js"); ?>"></script>

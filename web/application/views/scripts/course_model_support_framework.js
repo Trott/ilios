@@ -19,7 +19,7 @@
 
 
 
-ilios.namespace('course_model');
+ilios.course_model = ilios.course_model || {};
 
 // @private
 ilios.course_model.inLoadCourseModel = null;

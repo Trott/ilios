@@ -10,7 +10,7 @@
  * YAHOO.widget.SimpleEditor and its dependencies
  *
  */
-ilios.namespace('ui');
+ilios.ui = ilios.ui || {};
 
 /**
  * RichTextEditor inherits YUI Simple Editor.

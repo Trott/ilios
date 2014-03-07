@@ -62,7 +62,7 @@ if (YAHOO.lang.JSON) {
  * All kinds of crazy went into this object.
  * @class ilios.global
  */
-ilios.namespace('global');
+ilios.global = ilios.global || {};
 
 /**
  * Reads JSON data in element with id and returns an object

@@ -11,7 +11,7 @@
  * scripts/ilios_utilities.js
  */
 
-ilios.namespace('ui');
+ilios.ui = ilios.ui || {};
 
 ilios.ui.programCohortDialogTreeView = null;
 

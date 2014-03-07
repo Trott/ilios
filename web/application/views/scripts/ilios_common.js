@@ -2,7 +2,7 @@
  * @requires ilios.ui
  **/
 
-ilios.namespace('common');
+ilios.common = ilios.common || {};
 /**
  * @param args
  *    submit_override:

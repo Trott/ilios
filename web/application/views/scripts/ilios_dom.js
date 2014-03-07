@@ -18,7 +18,7 @@
  * @class dom
  * @static
  */
-ilios.namespace('dom');
+ilios.dom = ilios.dom || {};
 
 
 /**

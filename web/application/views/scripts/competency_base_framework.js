@@ -25,7 +25,7 @@
      * @class competencies
      * @namespace ilios
      */
-    var competencies = ilios.namespace('competencies');
+    ilios.competencies = ilios.competencies || {};
 
     /**
      * The internal school-competencies lookup-map.
@@ -415,12 +415,12 @@
     };
 
     // define public interface of this module/namespace.
-    competencies.getActiveSchoolCompetenciesList = getActiveSchoolCompetenciesList;
-    competencies.setSchoolCompetencies = setSchoolCompetencies;
-    competencies.getCompetency = getCompetency;
-    competencies.getSubdomains = getSubdomains;
-    competencies.appendListForSelectedCompetencies = appendListForSelectedCompetencies;
-    competencies.verifyChildlessUnselectedCompetencyNodes = verifyChildlessUnselectedCompetencyNodes;
-    competencies.generateSummaryStringForSelectedCompetencies = generateSummaryStringForSelectedCompetencies;
-    competencies.convertSchoolCompetencyHierarchiesIntoLookupMap = convertSchoolCompetencyHierarchiesIntoLookupMap;
+    ilios.competencies.getActiveSchoolCompetenciesList = getActiveSchoolCompetenciesList;
+    ilios.competencies.setSchoolCompetencies = setSchoolCompetencies;
+    ilios.competencies.getCompetency = getCompetency;
+    ilios.competencies.getSubdomains = getSubdomains;
+    ilios.competencies.appendListForSelectedCompetencies = appendListForSelectedCompetencies;
+    ilios.competencies.verifyChildlessUnselectedCompetencyNodes = verifyChildlessUnselectedCompetencyNodes;
+    ilios.competencies.generateSummaryStringForSelectedCompetencies = generateSummaryStringForSelectedCompetencies;
+    ilios.competencies.convertSchoolCompetencyHierarchiesIntoLookupMap = convertSchoolCompetencyHierarchiesIntoLookupMap;
 }());

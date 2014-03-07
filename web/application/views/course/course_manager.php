@@ -54,7 +54,7 @@ $viewsPath = getServerFilePath('views');
         var learningMaterialsControllerURL = "<?php echo $learningMaterialsControllerURL; ?>/";
         var adminUserDisplayName = "<?php echo $admin_user_short_name; ?>";
 
-        ilios.namespace('cm'); // assure the existence of this page's namespace
+        ilios.cm = ilios.cm || {}; // assure the existence of this page's namespace
 
         // We do this here due to load-order issues
         ilios.namespace('common.lm');

@@ -17,8 +17,7 @@
  */
 (function () {
 
-
-    ilios.namespace('cim');
+    ilios.cim = ilios.cim || {};
 
     var Lang = YAHOO.lang,
         Event = YAHOO.util.Event;

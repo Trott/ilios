@@ -12,7 +12,7 @@
  * variable "controllerURL" must be defined (can be any controller which 'subclasses' the abstract ilios controller)
  */
 
-ilios.namespace('mesh');
+ilios.mesh = ilios.mesh || {};
 
 // Consumers can modify these two to insert their own handlers
 ilios.mesh.meshSearchResultSelectionHandler = null;  // defaults to ilios.mesh.handleMeSHResultSelection

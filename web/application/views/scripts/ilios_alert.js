@@ -4,7 +4,7 @@
  * @class ilios.alert
  * @static
  */
-ilios.namespace('alert');
+ilios.alert = ilios.alert || {};
 
 /**
  * Queues to-be-displayed network-activity messages.

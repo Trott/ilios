@@ -49,7 +49,7 @@ $viewsPath = getServerFilePath('views');
         var controllerURL = "<?php echo $controllerURL; ?>/"; // expose this to our javascript
         var courseControllerURL = "<?php echo $courseControllerURL; ?>"; // similarly...
         var schoolId = "<?php echo $school_id; ?>";    // similarly...
-        ilios.namespace('igm');    // assure the existence of this page's namespace
+        ilios.igm = ilios.igm || {};    // assure the existence of this page's namespace
     </script>
     <script type="text/javascript" src="<?php echo appendRevision($viewsUrlRoot . "scripts/models/abstract_js_model_form.js"); ?>"></script>
     <script type="text/javascript" src="<?php echo appendRevision($viewsUrlRoot . "scripts/models/user_model.js"); ?>"></script>

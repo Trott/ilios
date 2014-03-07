@@ -49,7 +49,7 @@ $viewsPath = getServerFilePath('views');
         // expose this to our program_manager_*.js
         var controllerURL = "<?php echo $controllerURL; ?>/";
         // assure the existence of this page's namespace
-        ilios.namespace('pm');
+        ilios.pm = ilios.pm || {};
         // We do this here due to load-time issue; program_manager_dom loaded below, and
         // prior to the include-include of mesh picking php that eventually creates
         // this namespace, implements the custom save handler in this namespace

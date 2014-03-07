@@ -12,7 +12,7 @@
  */
 
 ilios.namespace('home.report');
-ilios.namespace('mesh');
+ilios.mesh = ilios.mesh || {};
 
 /*
  * ============================================================================

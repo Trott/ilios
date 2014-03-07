@@ -57,7 +57,7 @@ $viewsPath = getServerFilePath('views');
         var learningMaterialsControllerURL = "<?php echo $learningMaterialsControllerURL; ?>/";    // ...
         var parentCourseId = "<?php echo $course_id; ?>";                    // ...
 
-        ilios.namespace('om');            // assure the existence of this page's namespace
+        ilios.om = ilios.om || {};            // assure the existence of this page's namespace
     </script>
     <script type="text/javascript" src="<?php echo appendRevision($viewsUrlRoot . "scripts/models/abstract_js_model_form.js"); ?>"></script>
     <script type="text/javascript" src="<?php echo appendRevision($viewsUrlRoot . "scripts/models/competency_model.js"); ?>"></script>

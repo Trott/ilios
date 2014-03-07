@@ -4,7 +4,7 @@
  * DEPENDENCY: scripts/ilios_utilities.js
  */
 
-ilios.namespace('course_summary');
+ilios.course_summary = ilios.course_summary || {};
 
 // @private
 ilios.course_summary.loadedCourseModel = null;

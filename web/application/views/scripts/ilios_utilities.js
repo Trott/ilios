@@ -16,7 +16,7 @@
  * @class utilities
  * @static
  */
-ilios.namespace('utilities');
+ilios.utilities = ilios.utilities || {};
 
 ilios.utilities.UserNameFormatEnum = {
     LAST_FIRST: 0,

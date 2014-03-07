@@ -14,7 +14,7 @@
  * YUI IdleTimer
  */
 
-ilios.namespace('timer');
+ilios.timer = ilios.timer || {};
 
 /**
  * Instantiates and starts the idle timer, subscribes a timeout-handler function to it.

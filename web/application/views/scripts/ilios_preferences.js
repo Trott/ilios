@@ -11,7 +11,7 @@
  * scripts/ilios_base.js
  */
 
-ilios.namespace('preferences');
+ilios.preferences = ilios.preferences || {};
 
 /**
  * The page's preferences model.
