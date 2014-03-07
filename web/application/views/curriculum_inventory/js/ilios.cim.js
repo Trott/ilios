@@ -379,8 +379,11 @@
          * @protected
          */
         _initPrograms: function (data) {
-            data = Lang.isObject(data) ? data : {};
-            this._programs = data;
+            if (data && typeof data === 'object') {
+                this._programs = data;
+            } else {
+                this._programs = {};
+            }
         },
 
         /**
