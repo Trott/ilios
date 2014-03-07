@@ -20,8 +20,7 @@
 
     ilios.namespace('cim');
 
-    var Lang = YAHOO.lang,
-        Event = YAHOO.util.Event;
+    var Event = YAHOO.util.Event;
 
     /**
      * Creates a client-side application.
@@ -964,7 +963,7 @@
         SequenceBlockViewMap.superclass.constructor.call(this);
     };
 
-    Lang.extend(SequenceBlockViewMap, ilios.cim.model.ObjectMap, {
+    YAHOO.lang.extend(SequenceBlockViewMap, ilios.cim.model.ObjectMap, {
 
         /**
          * Adds a given sequence block view to the map.
