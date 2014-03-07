@@ -834,7 +834,7 @@
             }
             // get top level blocks
             list = map.list(function (item) {
-                return Lang.isNull(item.get('parent'));
+                return item.get('parent') === null;
             });
             // aways sort by academic level, order-in-sequence is not supported at the top level
             list.sort(map.sortByAcademicLevel);
