@@ -419,7 +419,9 @@
          */
         _initCourses: function (data) {
             var i, n, model, repo;
-            data = Lang.isArray(data) ? data : [];
+            if (! (data instanceof Array)) {
+                data = [];
+            }
             repo = this.getCourseRepository();
 
             for (i = 0, n = data.length; i < n; i++ ) {
