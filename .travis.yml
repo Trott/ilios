@@ -60,13 +60,11 @@ script:
   - phantomjs tests/jasmine/run-jasmine.js tests/jasmine/SpecRunner.html
 # Run PHPUnit tests
   - "${PWD}/tests/phpunit/bin/phpunit -c ${PWD}/tests/phpunit/default.phpunit.xml --include-path ${PWD}/tests/phpunit --exclude-group integration tests/phpunit/Ilios"
-# Because the PHPUnit tests unfortunately pollute the database, do a clean reinstall before running Behat tests.
-  - bin/phing db-install -q -propertyfile build.properties.sample -Dskip-prompt=true -Dskip-db-backup=true -Ddb.username=root -Ddb.password= -Ddb.group=ilios_test -Dencryption_key=lorem_ipsum -Ddeploydir=${PWD}/web -Dbackupdir=${PWD}/backup -Dwebuser=${USER} -Dwebgroup="`id -g -n`"
 
 # Run Behat tests on headless browsers
   - "(cd tests/behat && bin/behat --tags ~@ignore -p travis)"
 
-# Ensure we have a fresh DB between behat runs
+# Ensure we have a fresh DB between Behat runs
   - bin/phing db-install -q -propertyfile build.properties.sample -Dskip-prompt=true -Dskip-db-backup=true -Ddb.username=root -Ddb.password= -Ddb.group=ilios_test -Dencryption_key=lorem_ipsum -Ddeploydir=${PWD}/web -Dbackupdir=${PWD}/backup -Dwebuser=${USER} -Dwebgroup="`id -g -n`"
 
 # Run Behat tests on GUI browsers via Sauce
